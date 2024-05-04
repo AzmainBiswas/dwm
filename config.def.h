@@ -4,7 +4,7 @@
 #include <X11/XF86keysym.h>
 
 /* appearance */
-static const unsigned int borderpx  = 1;        /* border pixel of windows */
+static const unsigned int borderpx  = 2;        /* border pixel of windows */
 static const unsigned int gappx     = 5;        /* gaps between windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const unsigned int systraypinning = 0;   /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
@@ -16,7 +16,7 @@ static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 static const char *fonts[]          = { "JetBrainsMono Nerd Font:size=13", "Noto Color Emoji:pixelsize=13:antialias=true:autohint=true" };
 static const char dmenufont[]       = "monospace:size=10";
-static const char col_gray1[]       = "#222222";
+static const char col_gray1[]       = "#000000";
 static const char col_gray2[]       = "#444444";
 static const char col_gray3[]       = "#bbbbbb";
 static const char col_gray4[]       = "#eeeeee";
@@ -71,14 +71,14 @@ static const char *termcmd[]  = { "alacritty", NULL };
 
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
-	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
+	{ MODKEY,                       XK_d,      spawn,          {.v = dmenucmd } },
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
 	{ ControlMask,                  XK_Return, spawn,          SHCMD("wezterm") },
-	{ MODKEY,                       XK_b,      togglebar,      {0} },
-	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
-	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
-	{ MODKEY,                       XK_i,      incnmaster,     {.i = +1 } },
-	{ MODKEY,                       XK_d,      incnmaster,     {.i = -1 } },
+	{ MODKEY,                       XK_b,      togglebar,      {0} }, // toggle bar
+	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } }, // resizing
+	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } }, // resizing
+	{ Mod1Mask,                     XK_i,      incnmaster,     {.i = +1 } }, // increment to master
+	{ Mod1Mask,                     XK_d,      incnmaster,     {.i = -1 } }, // decrement from master
 	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
 	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
 	{ MODKEY|ShiftMask,             XK_Return, zoom,           {0} },
@@ -91,11 +91,21 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
 	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
 	{ MODKEY|ShiftMask,             XK_0,      tag,            {.ui = ~0 } },
-	{ MODKEY,                       XK_comma,  focusmon,       {.i = -1 } },
-	{ MODKEY,                       XK_period, focusmon,       {.i = +1 } },
-	{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
-	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
-	{ MODKEY,                       XK_minus,  setgaps,        {.i = -1 } },
+    
+    /* for multi monitor set up */
+    // { MODKEY,                       XK_comma,  focusmon,       {.i = -1 } },
+	// { MODKEY,                       XK_period, focusmon,       {.i = +1 } },
+	// { MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
+	// { MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
+
+    /* my custome maps */
+    { MODKEY,                       XK_period,  spawn,          SHCMD("emoji") },
+    { MODKEY|ShiftMask,             XK_d,       spawn,          SHCMD("rofi -show drun") },
+    { ControlMask,                  XK_Escape,  spawn,          SHCMD("dwm-power-menu") },
+    { MODKEY,                       XK_v,       spawn,          SHCMD("copyq menu") },
+	
+    /* gapes */
+    { MODKEY,                       XK_minus,  setgaps,        {.i = -1 } },
 	{ MODKEY,                       XK_equal,  setgaps,        {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_equal,  setgaps,        {.i = 0  } },
 
@@ -106,7 +116,7 @@ static const Key keys[] = {
 
     /* brightness control */
     { 0,                            XF86XK_MonBrightnessUp,     spawn, SHCMD("brightness_set -i") },
-    { 0,                            XF86XK_MonBrightnessDown,   spawn, SHCMD("brightness_set -i") },
+    { 0,                            XF86XK_MonBrightnessDown,   spawn, SHCMD("brightness_set -d") },
   
   /* media control */
     { 0,                            XF86XK_AudioPause,          spawn, SHCMD("playerctl play-pause") },
