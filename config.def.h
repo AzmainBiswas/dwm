@@ -109,6 +109,12 @@ static const Key keys[] = {
     { MODKEY|ShiftMask,             XK_d,       spawn,          SHCMD("rofi -show drun") },
     { ControlMask,                  XK_Escape,  spawn,          SHCMD("dwm-power-menu") },
     { MODKEY,                       XK_v,       spawn,          SHCMD("copyq menu") },
+    { MODKEY,                       XK_e,       spawn,          SHCMD("pcmanfm") },
+    
+    /* mpc control */
+    { Mod1Mask,                     XK_l,       spawn,          SHCMD("mpc prev") },
+    { Mod1Mask,                     XK_k,       spawn,          SHCMD("mpc toggle") },
+    { Mod1Mask,                     XK_j,       spawn,          SHCMD("mpc next") },
 	
     /* gapes */
     { MODKEY,                       XK_minus,  setgaps,        {.i = -1 } },
