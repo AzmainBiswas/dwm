@@ -7,6 +7,7 @@
 static const unsigned int borderpx  = 2;        /* border pixel of windows */
 static const unsigned int gappx     = 5;        /* gaps between windows */
 static const unsigned int snap      = 32;       /* snap pixel */
+static const int swallowfloating    = 0;        /* 1 means swallow floating windows by default */
 static const unsigned int systraypinning = 0;   /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
 static const unsigned int systrayonleft = 0;    /* 0: systray in the right corner, >0: systray on left of status text */
 static const unsigned int systrayspacing = 2;   /* systray spacing */
@@ -35,9 +36,13 @@ static const Rule rules[] = {
 	 *	WM_CLASS(STRING) = instance, class
 	 *	WM_NAME(STRING) = title
 	 */
-	/* class      instance    title       tags mask     isfloating   monitor */
-	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
-	{ "Firefox",  NULL,       NULL,       1 << 8,       0,           -1 },
+	/* class                        instance  title           tags mask  isfloating  isterminal  noswallow  monitor */
+	{ "Gimp",                       NULL,     NULL,           0,         1,          0,           0,        -1 },
+	{ "Firefox",                    NULL,     NULL,           2,    0,          0,          -1,        -1 },
+	{ "St",                         NULL,     NULL,           0,         0,          1,           0,        -1 },
+	{ "Alacritty",                  NULL,     NULL,           0,         0,          1,           0,        -1 },
+	{ "org.wezfurlong.wezterm",     NULL,     NULL,           0,         0,          1,           0,        -1 },
+	{ NULL,         NULL,     "Event Tester", 0,         0,          0,           1,        -1 }, /* xev */
 };
 
 /* layout(s) */
@@ -54,6 +59,7 @@ static const Layout layouts[] = {
 };
 
 /* key definitions */
+#define XK_PrintScreen	    0x0000ff61
 #define MODKEY Mod4Mask
 #define TAGKEYS(KEY,TAG) \
 	{ MODKEY,                       KEY,      view,           {.ui = 1 << TAG} }, \
@@ -118,10 +124,13 @@ static const Key keys[] = {
     { 0,                            XF86XK_MonBrightnessUp,     spawn, SHCMD("brightness_set -i") },
     { 0,                            XF86XK_MonBrightnessDown,   spawn, SHCMD("brightness_set -d") },
   
-  /* media control */
+    /* media control */
     { 0,                            XF86XK_AudioPause,          spawn, SHCMD("playerctl play-pause") },
     { 0,                            XF86XK_AudioNext,           spawn, SHCMD("playerctl next") },
     { 0,                            XF86XK_AudioPrev,           spawn, SHCMD("playerctl previous") },
+    
+    { 0,                            XK_PrintScreen,             spawn, SHCMD("flameshot gui --path=$HOME/Pictures/Screenshots/") },
+    { MODKEY,                       XK_PrintScreen,             spawn, SHCMD("flameshot full --path=$HOME/Pictures/Screenshots/") },
 
    /* tages */
 	TAGKEYS(                        XK_1,                      0)
