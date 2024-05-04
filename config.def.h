@@ -1,6 +1,7 @@
 /* See LICENSE file for copyright and license details. */
 
 /* includes */
+#include <X11/XF86keysym.h>
 
 /* appearance */
 static const unsigned int borderpx  = 1;        /* border pixel of windows */
@@ -13,7 +14,7 @@ static const int systraypinningfailfirst = 1;   /* 1: if pinning fails, display 
 static const int showsystray        = 1;        /* 0 means no systray */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const char *fonts[]          = { "JetBrainsMono Nerd Font:size=12", "Noto Color Emoji:pixelsize=12:antialias=true:autohint=true" };
+static const char *fonts[]          = { "JetBrainsMono Nerd Font:size=13", "Noto Color Emoji:pixelsize=13:antialias=true:autohint=true" };
 static const char dmenufont[]       = "monospace:size=10";
 static const char col_gray1[]       = "#222222";
 static const char col_gray2[]       = "#444444";
@@ -97,6 +98,22 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_minus,  setgaps,        {.i = -1 } },
 	{ MODKEY,                       XK_equal,  setgaps,        {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_equal,  setgaps,        {.i = 0  } },
+
+    /* volume control */
+    { 0,                            XF86XK_AudioLowerVolume,    spawn, SHCMD("volume_set -d") },
+    { 0,                            XF86XK_AudioRaiseVolume,    spawn, SHCMD("volume_set -i") },
+    { 0,                            XF86XK_AudioMute,           spawn, SHCMD("volume_set -m") },
+
+    /* brightness control */
+    { 0,                            XF86XK_MonBrightnessUp,     spawn, SHCMD("brightness_set -i") },
+    { 0,                            XF86XK_MonBrightnessDown,   spawn, SHCMD("brightness_set -i") },
+  
+  /* media control */
+    { 0,                            XF86XK_AudioPause,          spawn, SHCMD("playerctl play-pause") },
+    { 0,                            XF86XK_AudioNext,           spawn, SHCMD("playerctl next") },
+    { 0,                            XF86XK_AudioPrev,           spawn, SHCMD("playerctl previous") },
+
+   /* tages */
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)
