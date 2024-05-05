@@ -5,7 +5,7 @@
 
 /* appearance */
 static const unsigned int borderpx  = 2;        /* border pixel of windows */
-static const unsigned int gappx     = 5;        /* gaps between windows */
+static const unsigned int gappx     = 0;        /* gaps between windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int swallowfloating    = 0;        /* 1 means swallow floating windows by default */
 static const unsigned int systraypinning = 0;   /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
@@ -110,6 +110,7 @@ static const Key keys[] = {
     { ControlMask,                  XK_Escape,  spawn,          SHCMD("dwm-power-menu") },
     { MODKEY,                       XK_v,       spawn,          SHCMD("copyq menu") },
     { MODKEY,                       XK_e,       spawn,          SHCMD("pcmanfm") },
+    { MODKEY,                       XK_w,       spawn,          SHCMD("x11-wallpaper") },
     
     /* mpc control */
     { Mod1Mask,                     XK_l,       spawn,          SHCMD("mpc prev") },
