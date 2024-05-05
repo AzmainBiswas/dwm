@@ -4,8 +4,7 @@
 #include <X11/XF86keysym.h>
 
 /* appearance */
-static const unsigned int borderpx  = 2;        /* border pixel of windows */
-static const unsigned int gappx     = 0;        /* gaps between windows */
+static const unsigned int borderpx  = 1;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int swallowfloating    = 0;        /* 1 means swallow floating windows by default */
 static const unsigned int systraypinning = 0;   /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
@@ -97,7 +96,6 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
 	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
 	{ MODKEY|ShiftMask,             XK_0,      tag,            {.ui = ~0 } },
-    
     /* for multi monitor set up */
     // { MODKEY,                       XK_comma,  focusmon,       {.i = -1 } },
 	// { MODKEY,                       XK_period, focusmon,       {.i = +1 } },
@@ -116,11 +114,6 @@ static const Key keys[] = {
     { Mod1Mask,                     XK_l,       spawn,          SHCMD("mpc prev") },
     { Mod1Mask,                     XK_k,       spawn,          SHCMD("mpc toggle") },
     { Mod1Mask,                     XK_j,       spawn,          SHCMD("mpc next") },
-	
-    /* gapes */
-    { MODKEY,                       XK_minus,  setgaps,        {.i = -1 } },
-	{ MODKEY,                       XK_equal,  setgaps,        {.i = +1 } },
-	{ MODKEY|ShiftMask,             XK_equal,  setgaps,        {.i = 0  } },
 
     /* volume control */
     { 0,                            XF86XK_AudioLowerVolume,    spawn, SHCMD("volume_set -d") },
