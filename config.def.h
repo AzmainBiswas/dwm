@@ -15,7 +15,7 @@ static const int systraypinningfailfirst = 1;   /* 1: if pinning fails, display 
 static const int showsystray        = 1;        /* 0 means no systray */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const char *fonts[]          = { "JetBrainsMono Nerd Font:size=12", "Noto Color Emoji:pixelsize=12:antialias=true:autohint=true" };
+static const char *fonts[]          = { "JetBrainsMono Nerd Font:size=11", "Noto Color Emoji:pixelsize=11:antialias=true:autohint=true" };
 static const char dmenufont[]       = "monospace:size=10";
 static const char col_gray1[]       = "#000000";
 static const char col_gray2[]       = "#444444";
@@ -41,6 +41,7 @@ static const Rule rules[] = {
 	{ "Firefox", NULL,     NULL,           1 << 8,    0,          0,          -1,        -1 },
 	{ "St",      NULL,     NULL,           0,         0,          1,           0,        -1 },
     { "Alacritty",NULL,     NULL,           0,         0,          1,           0,        -1 },
+    { "kitty",NULL,     NULL,           0,         0,          1,           0,        -1 },
     { "org.wezfurlong.wezterm",NULL,     NULL,           0,         0,          1,           0,        -1 },
     { "Pavucontrol", NULL,    NULL,        0,         1,          0,            0,       -1 },
 	{ NULL,      NULL,     "Event Tester", 0,         0,          0,           1,        -1 }, /* xev */
@@ -76,12 +77,13 @@ static const Layout layouts[] = {
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-i", "-F", "-p", "Run >", NULL};
 static const char *termcmd[]  = { "alacritty", NULL };
+static const char *termcmd2[]  = { "kitty", NULL };
 
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_d,      spawn,          {.v = dmenucmd } },
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
-	{ ControlMask,                  XK_Return, spawn,          SHCMD("wezterm") },
+	{ ControlMask,                  XK_Return, spawn,          {.v = termcmd2 } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} }, // toggle bar
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } }, // resizing
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } }, // resizing
@@ -119,7 +121,7 @@ static const Key keys[] = {
     /* programs */
     { Mod1Mask,                       XK_e,       spawn,          SHCMD("pcmanfm") },
     { Mod1Mask,                     XK_b,       spawn,          SHCMD("firefox") },
-    { Mod1Mask,                     XK_g,       spawn,          SHCMD("dmenu_google.sh") },
+    { MODKEY,                     XK_g,       spawn,          SHCMD("dmenu_google.sh") },
     
     /* mpc control */
     { Mod1Mask,                     XK_l,       spawn,          SHCMD("mpc prev") },
