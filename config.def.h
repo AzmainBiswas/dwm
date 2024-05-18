@@ -115,8 +115,11 @@ static const Key keys[] = {
     { ControlMask,                  XK_Escape,  spawn,          SHCMD("dwm-power-menu") },
     { MODKEY,                       XK_v,       spawn,          SHCMD("copyq menu") },
     { MODKEY,                       XK_w,       spawn,          SHCMD("x11-wallpaper") },
+    
+    /* programs */
     { Mod1Mask,                       XK_e,       spawn,          SHCMD("pcmanfm") },
     { Mod1Mask,                     XK_b,       spawn,          SHCMD("firefox") },
+    { Mod1Mask,                     XK_g,       spawn,          SHCMD("dmenu_google.sh") },
     
     /* mpc control */
     { Mod1Mask,                     XK_l,       spawn,          SHCMD("mpc prev") },
