@@ -38,7 +38,8 @@ static const Rule rules[] = {
 	 */
 	/* class     instance  title           tags mask  isfloating  isterminal  noswallow  monitor */
 	{ "Gimp",     NULL,     NULL,           0,         1,          0,           0,        -1 },
-	{ "Firefox",  NULL,     NULL,           1 << 8,     0,          0,          -1,        -1 },
+	{ "firefox",  NULL,     NULL,           2,         0,          0,          -1,        -1 },
+	{ "Firefox",  NULL,     NULL,           2,         0,          0,          -1,        -1 },
 	{ "St",       NULL,     NULL,           0,         0,          1,           0,        -1 },
     { "Alacritty",NULL,     NULL,           0,         0,          1,           0,        -1 },
     { "kitty",    NULL,     NULL,           0,         0,          1,           0,        -1 },
@@ -77,7 +78,7 @@ static const Layout layouts[] = {
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-i", "-F", "-p", "Run >", NULL};
 static const char *termcmd[]  = { "alacritty", NULL };
-static const char *termcmd2[]  = { "kitty", NULL };
+static const char *termcmd2[]  = { "wezterm", NULL };
 
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
