@@ -24,7 +24,7 @@ static const char col_gray4[]       = "#282c34";
 static const char col_cyan[]        = "#a9a1e1";
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
-	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
+    [SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
 	[SchemeSel]  = { col_gray4, col_cyan,  col_cyan  },
 };
 
@@ -41,10 +41,10 @@ static const Rule rules[] = {
 	{ "firefox",  NULL,     NULL,           2,         0,          0,          -1,        -1 },
 	{ "Firefox",  NULL,     NULL,           2,         0,          0,          -1,        -1 },
 	{ "St",       NULL,     NULL,           0,         0,          1,           0,        -1 },
-    { "Alacritty",NULL,     NULL,           0,         0,          1,           0,        -1 },
-    { "kitty",    NULL,     NULL,           0,         0,          1,           0,        -1 },
-    { "org.wezfurlong.wezterm",NULL,     NULL,           0,         0,          1,           0,        -1 },
-    { "Pavucontrol", NULL,    NULL,        0,         1,          0,            0,       -1 },
+	{ "Alacritty",NULL,     NULL,           0,         0,          1,           0,        -1 },
+	{ "kitty",    NULL,     NULL,           0,         0,          1,           0,        -1 },
+	{ "org.wezfurlong.wezterm",NULL,     NULL,           0,         0,          1,           0,        -1 },
+	{ "Pavucontrol", NULL,    NULL,        0,         1,          0,            0,       -1 },
 	{ NULL,      NULL,     "Event Tester", 0,         0,          0,           1,        -1 }, /* xev */
 
 };
@@ -82,14 +82,14 @@ static const char *termcmd2[]  = { "wezterm", NULL };
 
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
-	{ MODKEY,                       XK_d,      spawn,          {.v = dmenucmd } },
+	{ MODKEY,                       XK_r,      spawn,          {.v = dmenucmd } },
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
-	{ Mod1Mask,                     XK_Return, spawn,          {.v = termcmd2 } },
+	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd2 } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} }, // toggle bar
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } }, // resizing
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } }, // resizing
-	{ Mod1Mask,                     XK_i,      incnmaster,     {.i = +1 } }, // increment to master
-	{ Mod1Mask,                     XK_d,      incnmaster,     {.i = -1 } }, // decrement from master
+	{ MODKEY,                       XK_i,      incnmaster,     {.i = +1 } }, // increment to master
+	{ MODKEY,                       XK_d,      incnmaster,     {.i = -1 } }, // decrement from master
 	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
 	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
 	{ MODKEY|ShiftMask,             XK_Return, zoom,           {0} },
@@ -102,51 +102,51 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
 	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
 	{ MODKEY|ShiftMask,             XK_0,      tag,            {.ui = ~0 } },
-    /* for multi monitor set up */
-    // { MODKEY,                       XK_comma,  focusmon,       {.i = -1 } },
-	// { MODKEY,                       XK_period, focusmon,       {.i = +1 } },
-	// { MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
-	// { MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
+	/* for multi monitor set up */
+	/* { MODKEY,                       XK_comma,  focusmon,       {.i = -1 } }, */
+	/* { MODKEY,                       XK_period, focusmon,       {.i = +1 } }, */
+	/* { MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } }, */
+	/* { MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } }, */
 
 	{ MODKEY,                       XK_minus,  setgaps,        {.i = -1 } },
 	{ MODKEY,                       XK_equal,  setgaps,        {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_equal,  setgaps,        {.i = 0  } },
 
-    /* my custome maps */
-    { MODKEY,                       XK_period,  spawn,          SHCMD("emoji") },
-    { MODKEY|ShiftMask,             XK_d,       spawn,          SHCMD("rofi -show drun") },
-    { ControlMask,                  XK_Escape,  spawn,          SHCMD("dwm-power-menu") },
-    { MODKEY,                       XK_v,       spawn,          SHCMD("copyq menu") },
-    { MODKEY,                       XK_w,       spawn,          SHCMD("x11-wallpaper") },
+	/* my custome maps */
+	{ MODKEY,                       XK_period,  spawn,          SHCMD("emoji") },
+	{ MODKEY|ShiftMask,             XK_r,       spawn,          SHCMD("rofi -show drun") },
+	{ ControlMask,                  XK_Escape,  spawn,          SHCMD("dwm-power-menu") },
+	{ MODKEY,                       XK_v,       spawn,          SHCMD("copyq menu") },
+	{ MODKEY,                       XK_w,       spawn,          SHCMD("x11-wallpaper") },
     
-    /* programs */
-    { Mod1Mask,                       XK_e,       spawn,          SHCMD("pcmanfm") },
-    { Mod1Mask,                     XK_b,       spawn,          SHCMD("firefox") },
-    { MODKEY,                     XK_g,       spawn,          SHCMD("dmenu_google.sh") },
+	/* programs */
+	/* { Mod1Mask,                     XK_e,       spawn,          SHCMD("pcmanfm") }, */
+	/* { Mod1Mask,                     XK_b,       spawn,          SHCMD("firefox") }, */
+	{ MODKEY,                       XK_g,       spawn,          SHCMD("dmenu_google.sh") },
     
-    /* mpc control */
-    { Mod1Mask,                     XK_l,       spawn,          SHCMD("mpc prev") },
-    { Mod1Mask,                     XK_k,       spawn,          SHCMD("mpc toggle") },
-    { Mod1Mask,                     XK_j,       spawn,          SHCMD("mpc next") },
+	/* mpc control */
+	/* { Mod1Mask,                     XK_l,       spawn,          SHCMD("mpc prev") }, */
+	/* { Mod1Mask,                     XK_k,       spawn,          SHCMD("mpc toggle") }, */
+	/* { Mod1Mask,                     XK_j,       spawn,          SHCMD("mpc next") }, */
 
-    /* volume control */
-    { 0,                            XF86XK_AudioLowerVolume,    spawn, SHCMD("volume_set -d") },
-    { 0,                            XF86XK_AudioRaiseVolume,    spawn, SHCMD("volume_set -i") },
-    { 0,                            XF86XK_AudioMute,           spawn, SHCMD("volume_set -m") },
+	/* volume control */
+	{ 0,                           XF86XK_AudioLowerVolume,    spawn, SHCMD("volume_set -d") },
+	{ 0,                           XF86XK_AudioRaiseVolume,    spawn, SHCMD("volume_set -i") },
+	{ 0,                           XF86XK_AudioMute,           spawn, SHCMD("volume_set -m") },
 
-    /* brightness control */
-    { 0,                            XF86XK_MonBrightnessUp,     spawn, SHCMD("brightness_set -i") },
-    { 0,                            XF86XK_MonBrightnessDown,   spawn, SHCMD("brightness_set -d") },
+	/* brightness control */
+	{ 0,                           XF86XK_MonBrightnessUp,     spawn, SHCMD("brightness_set -i") },
+	{ 0,                           XF86XK_MonBrightnessDown,   spawn, SHCMD("brightness_set -d") },
   
-    /* media control */
-    { 0,                            XF86XK_AudioPause,          spawn, SHCMD("playerctl play-pause") },
-    { 0,                            XF86XK_AudioNext,           spawn, SHCMD("playerctl next") },
-    { 0,                            XF86XK_AudioPrev,           spawn, SHCMD("playerctl previous") },
+	/* media control */
+	{ 0,                           XF86XK_AudioPause,          spawn, SHCMD("playerctl play-pause") },
+	{ 0,                           XF86XK_AudioNext,           spawn, SHCMD("playerctl next") },
+	{ 0,                           XF86XK_AudioPrev,           spawn, SHCMD("playerctl previous") },
     
-    { 0,                            XK_PrintScreen,             spawn, SHCMD("flameshot gui --path=$HOME/Pictures/Screenshots/") },
-    { MODKEY,                       XK_PrintScreen,             spawn, SHCMD("flameshot full --path=$HOME/Pictures/Screenshots/") },
+	{ 0,                           XK_PrintScreen,             spawn, SHCMD("flameshot gui --path=$HOME/Pictures/Screenshots/") },
+	{ MODKEY,                      XK_PrintScreen,             spawn, SHCMD("flameshot full --path=$HOME/Pictures/Screenshots/") },
 
-   /* tages */
+	/* tages */
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)
